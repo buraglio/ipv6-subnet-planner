@@ -2,7 +2,7 @@
 
 ## Description
 
-The IPv6 Subnet Planner is nothing more than a simple Python script designed to help network engineers, IT administrators, or zealous hobbiests to plan and allocate IPv6 subnets. It really just takes an IPv6 prefix as input and generates subnets of a user-specified prefix length. This can be useful for visualizing the subnets and for importing them into other things for more effective use. 
+The IPv6 Subnet Planner is nothing more than a simple Python script designed to help network engineers, IT administrators, or zealous hobbyists to plan and allocate IPv6 subnets. It really just takes an IPv6 prefix as input and generates subnets of a user-specified prefix length. This can be useful for visualizing the subnets and for importing them into other things for more effective use. 
 It does have some limits. If you ask the script to compile all of the /127 prefixes in a /64, be prepared to wait a pretty long time. It is best used to do high level planning from RIR allocations or PA allocations at an organizational level (i.e. break a /32 into a bunch of /40s). It assumes you want to do things from the CLI, but someone could probably write this into a web app, maybe. 
 
 ## "Features"
