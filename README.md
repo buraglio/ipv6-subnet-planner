@@ -11,6 +11,10 @@ Accepts an IPv6 prefix and a new prefix length to generate subnet allocations.
 
 Allows output to be saved to a file.
 
+Warns if the prefixes requested are not on a nibble boundary.
+
+Outputs to json if requested. Why? I have no idea but it was shockingly easy to do. 
+
 ## Requirements
 
 Python 3.x
