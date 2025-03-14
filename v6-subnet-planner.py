@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import ipaddress
 import argparse
+import json
 # Keep it super simple and use easy modules because I'm dumb
-# Takes a STD input of a prefix (3fff:1::/32) and breaks it into a user defined set of subnets
 
 def subnet_ipv6(prefix: str, new_prefix: int):
     try:
@@ -22,13 +22,19 @@ def main():
     parser.add_argument("-s", "--subnet", required=True, help="IPv6 prefix (e.g., 2001:db8::/32)")
     parser.add_argument("-p", "--prefix", type=int, required=True, help="New subnet prefix length (e.g., 48)")
     parser.add_argument("-o", "--output", help="Output file name")
+    parser.add_argument("-j", "--json", action="store_true", help="Output in JSON format")
     
     args = parser.parse_args()
     
     subnets = subnet_ipv6(args.subnet, args.prefix)
     
     if subnets:
-        output_text = f"\nGenerated {len(subnets)} subnets:\n" + "\n".join(str(subnet) for subnet in subnets)
+        if args.json:
+            output_data = {"subnets": [str(subnet) for subnet in subnets]}
+            output_text = json.dumps(output_data, indent=4)
+        else:
+            output_text = f"\nGenerated {len(subnets)} subnets:\n" + "\n".join(str(subnet) for subnet in subnets)
+        
         print(output_text)
         
         if args.output:
