@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import ipaddress
+import argparse
 # Keep it super simple and use easy modules because I'm dumb
 # Takes a STD input of a prefix (3fff:1::/32) and breaks it into a user defined set of subnets
 
@@ -17,18 +18,27 @@ def subnet_ipv6(prefix: str, new_prefix: int):
         return []
 
 def main():
-    ipv6_prefix = input("Enter the IPv6 prefix (e.g., 3fff:1::/32): ")
-    new_prefix = int(input("Enter the new subnet prefix length (e.g., 48): "))
+    parser = argparse.ArgumentParser(description="IPv6 Subnet Planner")
+    parser.add_argument("-s", "--subnet", required=True, help="IPv6 prefix (e.g., 2001:db8::/32)")
+    parser.add_argument("-p", "--prefix", type=int, required=True, help="New subnet prefix length (e.g., 48)")
+    parser.add_argument("-o", "--output", help="Output file name")
     
-    subnets = subnet_ipv6(ipv6_prefix, new_prefix)
+    args = parser.parse_args()
+    
+    subnets = subnet_ipv6(args.subnet, args.prefix)
     
     if subnets:
-        print(f"\nGenerated {len(subnets)} subnets:")
-        for subnet in subnets:
-            print(subnet)
+        output_text = f"\nGenerated {len(subnets)} subnets:\n" + "\n".join(str(subnet) for subnet in subnets)
+        print(output_text)
+        
+        if args.output:
+            with open(args.output, "w") as file:
+                file.write(output_text)
+            print(f"Subnets written to {args.output}")
     else:
         print("No subnets generated.")
 
 if __name__ == "__main__":
     main()
+
 
