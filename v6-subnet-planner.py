@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Create a subnet list for IPv6 address planning. 
+# This does not support IPv4 because it is a dead language.
+# Hastily cobbled together by buraglio@forwardingplane.net
+# Licensed as open with attribution
+# Currently there are issues with generating from longer prefixes that I have not figured out, sorry
 import ipaddress
 import argparse
 import json
@@ -13,7 +18,7 @@ def subnet_ipv6(prefix: str, new_prefix: int):
         subnets = list(network.subnets(new_prefix=new_prefix))
         
         if new_prefix % 4 != 0:
-            print("Warning: This will not output prefixes on a nibble boundary. Maybe rethink what you are doing?")
+            print("Warning: This will not output prefixes on a nibble boundary.")
         
         return subnets
     except ValueError as e:
@@ -38,12 +43,12 @@ def main():
         else:
             output_text = f"\nGenerated {len(subnets)} subnets:\n" + "\n".join(str(subnet) for subnet in subnets)
         
-        print(output_text)
-        
         if args.output:
             with open(args.output, "w") as file:
                 file.write(output_text)
             print(f"Subnets written to {args.output}")
+        else:
+            print(output_text)
     else:
         print("No subnets generated.")
 
