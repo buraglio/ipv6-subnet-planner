@@ -18,7 +18,7 @@ def subnet_ipv6(prefix: str, new_prefix: int):
         subnets = list(network.subnets(new_prefix=new_prefix))
         
         if new_prefix % 4 != 0:
-            print("Warning: This will not output prefixes on a nibble boundary.")
+            print("Warning: This will not output prefixes on a nibble boundary. Maybe rethink what you are doing?")
         
         return subnets
     except ValueError as e:
@@ -27,7 +27,7 @@ def subnet_ipv6(prefix: str, new_prefix: int):
 
 def main():
     parser = argparse.ArgumentParser(description="IPv6 Subnet Planner")
-    parser.add_argument("-s", "--subnet", required=True, help="IPv6 prefix (e.g., 2001:db8::/32)")
+    parser.add_argument("-s", "--subnet", required=True, help="IPv6 prefix (e.g., 3fff:1::/32)")
     parser.add_argument("-p", "--prefix", type=int, required=True, help="New subnet prefix length (e.g., 48)")
     parser.add_argument("-o", "--output", help="Output file name")
     parser.add_argument("-j", "--json", action="store_true", help="Output in JSON format")
