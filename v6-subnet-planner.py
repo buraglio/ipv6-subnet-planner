@@ -2,7 +2,6 @@
 import ipaddress
 import argparse
 import json
-# Keep it super simple and use easy modules because I'm dumb
 
 def subnet_ipv6(prefix: str, new_prefix: int):
     try:
@@ -12,6 +11,10 @@ def subnet_ipv6(prefix: str, new_prefix: int):
             return []
         
         subnets = list(network.subnets(new_prefix=new_prefix))
+        
+        if new_prefix % 4 != 0:
+            print("Warning: This will not output prefixes on a nibble boundary. Maybe rethink what you are doing?")
+        
         return subnets
     except ValueError as e:
         print(f"Invalid input: {e}")
@@ -46,5 +49,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
