@@ -34,6 +34,8 @@ Arguments
 
 * -o, --output (Optional): The output file to save the generated subnets.
 
+* -j, --json (Optional): Output to JSON format.
+
 Example
 
 `./v6_subnet_planner.py -s 3fff:1::/32 -p 48 -o subnets.txt`
