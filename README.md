@@ -8,13 +8,13 @@ It does have some limits. If you ask the script to compile all of the /127 prefi
 
 ## "Features"
 
-Accepts an IPv6 prefix and a new prefix length to generate subnet allocations.
+* Accepts an IPv6 prefix and a new prefix length to generate subnet allocations.
 
-Allows output to be saved to a file.
+* Allows output to be saved to a file.
 
-Warns if the prefixes requested are not on a nibble boundary.
+* Warns if the prefixes requested are not on a nibble boundary.
 
-Outputs to json if requested. Why? I have no idea but it was shockingly easy to do. 
+* Outputs to json if requested. Why? I have no idea but it was shockingly easy to do. 
 
 ## Requirements
 
