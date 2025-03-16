@@ -12,12 +12,18 @@ Crude attempt to "webify" this thing.
 * Install Flask:
 `pip3 install flask`
 
-Save the script as `app.py`, create a templates folder, and place index.html inside.
+Save the script as `webapp.py`.
+`chmod +x webapp.py`
 
 ## Run:
 `python app.py`
+or
+`./webapp.py`
 
 Open http://[::1]:5000/ in a local browser.
 
 ## Best practice
 Wrap this thing in nginx and add an SSL certificate.
+
+## To Do
+Make an init or systemctl script to start this piece of junk on boot
