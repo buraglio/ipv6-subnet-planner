@@ -33,23 +33,17 @@ def subnet_ipv6(prefix: str, new_prefix: int):
 @app.route("/")
 def home():
     """Render the main web UI."""
-    return render_template("index.html")  # Ensure you have 'templates/index.html'
+    return render_template("index.html")  # Make sure 'templates/index.html' is in the right place.
 
-@app.route("/api/subnet", methods=["GET", "POST"])
+@app.route("/api/subnet", methods=["POST"])
 def api_subnet():
-    """API endpoint to generate subnets, supporting both GET and POST requests."""
+    """API endpoint to generate subnets via POST requests from the web form."""
     
-    if request.method == "GET":
-        # Handle query parameters from URL
-        prefix = request.args.get("subnet")
-        new_prefix = request.args.get("prefix")
-    else:  
-        # Handle form data from POST
-        prefix = request.form.get("subnet")
-        new_prefix = request.form.get("prefix")
+    prefix = request.form.get("subnet")  # Extract from form data
+    new_prefix = request.form.get("prefix")
 
     if not prefix or not new_prefix or not new_prefix.isdigit():
-        return jsonify({"error": "Invalid input."}), 400
+        return jsonify({"error": "Invalid input. Please enter a valid IPv6 prefix and prefix size."}), 400
 
     new_prefix = int(new_prefix)
     message, subnets = subnet_ipv6(prefix, new_prefix)
