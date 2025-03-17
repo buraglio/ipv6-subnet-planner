@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 #Create a flask app that exposes an API
-from flask import Flask, request, render_template, jsonify
 import ipaddress
+import argparse
+import json
+from flask import Flask, request, render_template, jsonify
+import os
+import subprocess
 
 app = Flask(__name__)
 
@@ -15,7 +19,7 @@ def subnet_ipv6(prefix: str, new_prefix: int):
         
         warning = None
         if new_prefix % 4 != 0:
-            warning = "Warning: This will not output prefixes on a nibble boundary. Maybe rethink what you are doing?"
+            warning = "Warning: This will not output prefixes on a nibble boundary."
         
         return {"warning": warning}, subnets
     except ValueError as e:
@@ -56,5 +60,16 @@ def api_subnet():
     
     return jsonify({"warning": message.get("warning"), "subnets": [str(subnet) for subnet in subnets]})
 
+def run_app(daemon=False):
+    if daemon:
+        print("Running in daemon mode...")
+        subprocess.Popen(["gunicorn", "--daemon", "--bind", "[]::1]:5000", "app:app"])
+    else:
+        app.run(debug=True, host="[::1]")
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    parser = argparse.ArgumentParser(description="IPv6 Subnet Planner Web App")
+    parser.add_argument("-d", "--daemon", action="store_true", help="Run the app as a daemon")
+    
+    args = parser.parse_args()
+    run_app(daemon=args.daemon)

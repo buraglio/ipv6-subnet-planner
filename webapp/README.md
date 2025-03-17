@@ -16,9 +16,11 @@ Save the script as `webapp.py`.
 `chmod +x webapp.py`
 
 ## Run:
-`python app.py`
+`python app.py -d`
 or
-`./webapp.py`
+`./webapp.py -d`
+
+Running with `-d` requires `argparse` and will run this in the background using `gunicorn`. It will run as normal without `-d`
 
 Open http://[::1]:5000/ in a local browser.
 
