@@ -47,3 +47,6 @@ Example
 `./v6_subnet_planner.py -s 3fff:1::/32 -p 48 -o subnets.txt`
 
 This command will generate /48 subnets from the given /32 prefix and save them to subnets.txt.
+
+## Webapp
+There is a very crude but usable flask based webapp that can be installed to provide an API endpoint as well as a simple web interface in the folder `webapp`.
