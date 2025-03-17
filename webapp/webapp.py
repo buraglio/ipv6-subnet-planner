@@ -63,7 +63,7 @@ def api_subnet():
 def run_app(daemon=False):
     if daemon:
         print("Running in daemon mode...")
-        subprocess.Popen(["gunicorn", "--daemon", "--bind", "[]::1]:5000", "app:app"])
+        subprocess.Popen(["gunicorn", "--daemon", "--bind", "[::1]:5000", "app:app"])
     else:
         app.run(debug=True, host="[::1]")
 
