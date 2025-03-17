@@ -15,7 +15,7 @@ def subnet_ipv6(prefix: str, new_prefix: int):
         
         warning = None
         if new_prefix % 4 != 0:
-            warning = "Warning: This will not output prefixes on a nibble boundary."
+            warning = "Warning: This will not output prefixes on a nibble boundary. Maybe rethink what you are doing?"
         
         return {"warning": warning}, subnets
     except ValueError as e:
