@@ -19,6 +19,9 @@ It does have some limits. If you ask the script to compile all of the /127 prefi
 ## Requirements
 
 Python 3.x
+flask
+gunicorn 
+argparse
 
 ## Installation
 
