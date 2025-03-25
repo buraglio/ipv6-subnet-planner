@@ -48,7 +48,7 @@ Arguments
 
 * -s, --subnet (Required): The IPv6 prefix to be subnetted (e.g., 3fff:1::/32).
 
-* -p, --prefix (Required): The nwe subnet prefix length (e.g., 48).
+* -p, --prefix (Required): The new subnet prefix length (e.g., 48).
 
 * -o, --output (Optional): The output file to save the generated subnets.
 
