@@ -22,7 +22,19 @@ Python 3.x
 
 ## Installation
 
-Ensure you have Python installed, then download the script. Profit (maybe, but not likely).
+Ensure you have Python installed, then download the script.
+
+Install all requirements:
+`pip3 install flask gunicorn argparse`
+Profit (maybe, but not likely).
+
+~Optional:~
+
+Set up a venv (not required. These things drive me nuts but I am beginning to see utility)
+cd to the directory where you want to run this thing. 
+`python3 -m venv .`
+`source bin/activate`
+`python3 -m pip install flask gunicorn argparse`
 
 ## Use
 
@@ -42,11 +54,46 @@ Arguments
 
 * -j, --json (Optional): Output to JSON format.
 
+* -l, --limit (Optional): Limit output to a specific number of lines (it will still fully process, this is cosmetic only)
+
 Example
 
-`./v6_subnet_planner.py -s 3fff:1::/32 -p 48 -o subnets.txt`
+`./v6_subnet_planner.py -s 3fff:1::/32 -p 48 -l 4 -o subnets.txt`
 
-This command will generate /48 subnets from the given /32 prefix and save them to subnets.txt.
+This command will generate /48 subnets from the given /32 prefix and save the first 4 of them to subnets.txt.
 
-## Webapp
-There is a very crude but usable flask based webapp that can be installed to provide an API endpoint as well as a simple web interface in the folder `webapp`.
+# Webapp
+
+## IPv6-subnet-planner "webapp"
+
+Crude attempt to "webify" this thing.
+
+## Features:
+* Web Interface – Users can enter an IPv6 prefix and subnet size via a form.
+* API Endpoint – `/api/subnet` allows programmatic access to subnetting via POST parameters.
+* Validation – Prevents invalid inputs and provides questionably useful warnings.
+* JSON Output – The API returns messy JSON formatted subnets.
+
+## Install:
+* Install Flask:
+`pip3 install flask gunicorn argparse`
+
+Save the script as `v6-subnet-planner.py`.
+`chmod +x v6-subnet-planner.py`
+
+## Run:
+`python v6-subnet-planner.py -d`
+or
+`./v6-subnet-planner.py -d`
+
+Running with `-d` requires `argparse` and will run this in the background using `gunicorn`. It will run as normal without `-d`
+
+Open http://[::1]:5000/ in a local browser.
+
+## Best practice
+Wrap this thing in nginx and add an SSL certificate.
+
+## To Do
+* Make an init or systemctl script to start this piece of junk on boot
+* Add option to output as plan text as well as json
+
