@@ -1,3 +1,6 @@
+# Binary version
+This repo is for the original python code. There is a go binary that is *much* faster and efficient, and contains more utility, including expanded capabilities, that is available [here](https://github.com/buraglio/ipv6utils)
+
 # Python IPv6 Subnet Planner
 
 ## Description
